@@ -1,0 +1,5 @@
+MAIN_URL_CODE_CHALLENGER=http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/source-sample.json
+ENVIRONMENT=Development
+DEBUG=True
+TESTING=True
+PORT=5000

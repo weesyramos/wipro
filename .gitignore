@@ -1,0 +1,102 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+htmlcov
+.cache/
+.mysql/
+include/
+lib/
+pip-selfcheck.json
+share/
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+#Mac restore files
+.DS_Store
+
+# sqlite
+*.db
+
+# The virtualenv
+.env
+.envold
+.venv
+
+# pip
+src
+build
+
+.noseids
+
+logs
+
+# PyCharm
+.idea
+
+.directory
+
+# Backup / Temporary Files
+*.sw[mnop]
+*.bkp
+*.orig
+*.BACKUP.*
+*.BASE.*
+*.REMOTE.*
+*.LOCAL.*
+*.py[cod]
+*~
+
+# Rope files
+.ropeproject
+
+tmp/
+
+# NetBeans
+nbproject/
+
+# nose --with-coverage file
+coverage.xml
+
+# Sphinx
+_build
+
+.cache/*
+
+.vscode/*
+.pytest_cache/*
+
+node_modules/*
+package_json*
+package-lock*
+
+# other
+*.pyc
+*__pycache__*
