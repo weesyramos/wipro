@@ -16,7 +16,7 @@ def create_app():
     # Config APP
     app = Flask(__name__)
     app.config.from_object('backend.settings')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./residencias_db.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     config_db(app)

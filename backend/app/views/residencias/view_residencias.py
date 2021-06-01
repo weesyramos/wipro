@@ -17,5 +17,16 @@ class ViewResidencias:
             schema_error=AppBadRequest,
         )
 
-        def list_viva_real(schema):
-            return jsonify(ServiceResidencias.list(**schema), 200)
+        def list_residencias(schema):
+            return jsonify(ServiceResidencias.list_residencias(**schema), 200)
+
+
+    # def __init__(self, blueprint, prefix=''):
+    #     @blueprint.route(prefix, methods=['GET'])
+    #     @inject(
+    #         schema=RequestResidenciasSchema,
+    #         schema_error=AppBadRequest,
+    #     )
+
+    #     def list_viva_real(schema):
+    #         return jsonify(ServiceResidencias.list(**schema), 200)
