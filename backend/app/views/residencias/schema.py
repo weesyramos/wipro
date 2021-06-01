@@ -38,3 +38,12 @@ class ResponseResidenciasSchema(Schema):
     calculated_host_listings_count = fields.String() 	
     availability_365 = fields.String() 	
     neighbourhood_group = fields.String() 
+
+
+class RequestLikeSchema(Schema):
+    id = fields.Integer()
+
+
+class RequestLikeSchema(Schema):
+    id = fields.Integer()
+    like = fields.Boolean()

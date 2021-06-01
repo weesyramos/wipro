@@ -1,7 +1,7 @@
 version: '3'
 services:
   backend:
-      image: zap
+      image: residencias
       env_file:
           - docker_env
       command: pytest

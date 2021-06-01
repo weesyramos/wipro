@@ -16,11 +16,3 @@ def app(request):
     app = create_app()
 
     return app
-
-@pytest.fixture()
-def main_url_zap_imoveis():
-    return settings.MAIN_URL_ZAP
-
-@pytest.fixture()
-def main_url_viva_real():
-    return settings.MAIN_URL_VIVA_REAL

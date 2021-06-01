@@ -24,6 +24,7 @@ class ModelResidencias(db.Model):
     calculated_host_listings_count = db.Column(db.String(255), nullable=False)	
     availability_365 = db.Column(db.String(255), nullable=False)	
     neighbourhood_group = db.Column(db.String(255), nullable=False)
+    like = db.Column(db.Boolean, default=False)
 
 
     def __repr__(self):

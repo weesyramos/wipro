@@ -1,15 +1,13 @@
-from flask import current_app
+from flask import current_app, request
 
-from backend.app.views.residencias.schema import ResponseResidenciasSchema
+from backend.app.views.residencias.schema import ResponseResidenciasSchema, RequestLikeSchema
 from backend.core.models.model_residencias import ModelResidencias
-
 
 
 class ServiceResidencias:
 
     @staticmethod
     def list_residencias(**schema):
-        import ipdb; ipdb.set_trace()
         name = schema.get('name', False) 	
         host_id	 = schema.get('host_id', False) 
         host_name = schema.get('host_name', False) 	
@@ -75,3 +73,35 @@ class ServiceResidencias:
 
 
         return ResponseResidenciasSchema(many=True).dump(data.all())
+
+    @staticmethod
+    def list_preco_medio(**schema):
+        rooms = ['Entire home/apt', 'Private room', 'Shared room']
+        data = []
+        for room in rooms:
+            query = ModelResidencias.query
+            query = query.filter_by(neighbourhood_group=schema.get('neighbourhood_group'))
+            temp_data = {
+                'neighbourhood_group': schema.get('neighbourhood_group'),
+                'room_type': room,
+                'price' : 0.0
+            }
+            media = 0
+            query = query.filter_by(room_type=room)
+            if len(query.all()) > 0:
+                for row in query:
+                    media += float(row.price)
+                temp_data['price'] = media / len(query.all())
+                data.append(temp_data)
+
+        return data
+
+
+    @staticmethod
+    def like(**schema):
+        id = request.json['id']
+        data = ModelResidencias.query.filter_by(id=id).first()
+        data.like = True
+        current_app.db.session.commit()
+        return RequestLikeSchema().dump(data) 
+            

@@ -7,4 +7,5 @@ from backend.app.views.residencias.view_residencias import ViewResidencias
 app_blueprint = Blueprint('app', __name__)
 
 
-ViewResidencias(app_blueprint, '/residencias')
+ViewResidencias(app_blueprint, '/wipro')
+
