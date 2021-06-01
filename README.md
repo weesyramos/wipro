@@ -1,64 +1,50 @@
-# Code Challenge Grupo ZAP
-## API feita em Flask para integrar as plataformas Zap e Viva Real
+# Teste WIPRO - ITAU
+## API feita em Flask para manipulação de Data Frames e entrega dos dados em JSON
 <img src="https://img.shields.io/badge/Flask-v1.0.2-blue"/> <img src="https://img.shields.io/badge/PyTest-v5.4.3-yellow"/> <img src="https://img.shields.io/badge/marshmallow-v3.12.1-orange"/>
 
 
 
 # Como rodar localmente
-O projeto esta rodando com Docker, caso não tenha ainda o Docker instalado em sua máquina, basta seguir o step by step proposto pela propria documentação oficial do Docker, link abaixo:
+Primeiramente é necessário ter uma virtualenv usando python 3.6:
 
-[https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+[https://pypi.org/project/virtualenv/](https://pypi.org/project/virtualenv/)
 
-Com o Docker instalado precisamos criar a imagem:
+Para ativar o ambiente é só entrar no diretório raiz da env que foi criada e rodar o comando:
 
-##### docker build -t zap-code-challenger .
+##### source bin/activate
 
-Com sua imagem pronta, basta inicializar o container:
+Agora será preciso instalar as dependencias do projeto:
 
-##### docker run -p 2000:5000 zap-code-challenger
+##### pip install -r requirements/local.txt
 
-Poderá ter acesso aos endpoints para consulta da API:
+Também será necessário adicinar uma variavel de ambiente
 
-[http://localhost:2000/v1/code_challenger/zap_imoveis](http://localhost:2000/v1/code_challenger/zap_imoveis)
+##### export FLASK_APP=backend.__ini__.py
 
-[http://localhost:2000/v1/code_challenger/viva_real](http://localhost:2000/v1/code_challenger/viva_real)
+Agora é a hora de criar, migrar e atualizar o banco, usando os comandos abaixo seguidos um do outro:
+
+##### flask db init
+##### flask db migrate
+##### flask db upgrade
+
+Agora é a hora de rodarmos o script para manipular e persistir no banco os dados gerados. Na pasta raiz do projeto (onde encontra o arquivo **manage.py**)
+
+##### python manage.py run_bases
+
+Esse provesso pode demorar um pouco devido a quantidade de registro. Num cenário ideial seria interessando colocar num lambda (AWS), ou realizar de forma assincrona com um **celery**, por exemplo.
+
+Com todos esses passos criados, a API já esta pronta para ser consumida. Use o comando **flask run** e acesse os endpoints:
+
+[http://127.0.0.1:5000/v1/api/wipro/residencias](http://127.0.0.1:5000/v1/api/wipro/residencias)
+[http://127.0.0.1:5000/v1/api/wipro/preco-medio](http://127.0.0.1:5000/v1/api/wipro/preco-medio)
+[http://127.0.0.1:5000/v1/api/wipro/like](http://127.0.0.1:5000/v1/api/wipro/like)
 
 # Como rodar os testes
-O projeto usa o docker compose para rodar os testes, basta rodar o comando:
-##### docker-compose run --rm backend py.test --tb=short -s --disable-warnings -k tests/
 
-# Como fazer deploy
-Para colocar o projeto em produção usei o Heroku para hospedar a api.
+Os testes são simbólicos, apenas para efeitos demonstrativos de como usa-los. Foram criados dois testes de integração que verificam se o retorna da API é 200, indicando que está tudo ok
+Na pasta raiz use o comando
+##### pytest
 
-Primeiramente é preciso ter uma conta no Heroku:
-
-[https://www.heroku.com/](https://www.heroku.com/)
-
-No terminal use o comando para se logar no Heroku:
-##### heroku login
-
-Também é necessário a criação de um arquivo manifesto "heroku.yml" usado para algumas configurações de deploy. Pode ser visto esse arquivo na raiz do projeto com as configurações básicas para subir em produção.
-
-Como próximo passo será necessário a criação do app para o Heroku:
-##### heroku create code-zap-challenger
-
-E também criar uma branch remota
-##### git remote add 'branch-name' 'app-link'
-
-Como o projeto está rodando em container, é preciso deixar explicito ao Heroku isso, para configurações internas da plataforma:
-##### heroku stack:set container
-
-E por último, mas não menos importante, o deploy de fato da aplicação
-##### git push heroku master
-
-Esse passo já está completo e pode ser acessado pelos endpoints
-
-[https://grupozap-challenger.herokuapp.com/v1/code_challenger/zap_imoveis](https://grupozap-challenger.herokuapp.com/v1/code_challenger/zap_imoveis
-)
-
-[https://grupozap-challenger.herokuapp.com/v1/code_challenger/viva_real](https://grupozap-challenger.herokuapp.com/v1/code_challenger/viva_real)
 
 ### Considerações finais
-O primeiro request tende a ser um pouco mais demorado por carregar um source de milhares de registros. Após o primeiro request esses dados são guardados em memória e pode ser usado de maneira muito mais rápida.
-
-O Heroku fornece upload de aplicações gratuitas e para isso ele desliga a máquina tempos após não ser utilizada, mas pode ficar tranquilo que assim que a aplicação requebe um request ele trata de liga-lá, e isso também custa alguns poucos segundos.
+Esse projeto é simples e tem por finalidade demonstrar um pouco dos meus conhecimentos e estilo de trabalho. Tenho muito a aprender e experiencia para adquirir, mas acredito que todos nós podemos ter trocas de informações e que todos podemos aprender um pouquinho com nossos colegas de trabalhos.

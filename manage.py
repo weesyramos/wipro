@@ -1,6 +1,6 @@
-from flask import current_app
 import pandas as pd
 
+from flask import current_app
 from flask_script import Manager
 
 from backend import create_app, app
@@ -13,6 +13,7 @@ manager = Manager(app)
 
 @manager.command
 def run_bases():
+    # MANIPULA E CRIA .CSV
     NAMES_GROUP = ['Brooklyn', 'Manhattan', 'Queens', 'Staten Island']
 
     df_airbnb = pd.read_csv('bases/airbnb_ny_2019.csv',encoding='utf-8', delimiter=',')
@@ -34,6 +35,7 @@ def run_bases():
     _commit_bases_csv_bd(new_df)
 
 def _commit_bases_csv_bd(df):
+    # ITERA SOBRE O DATA FRAME MANIPULADO E PERSISTE NO DB
     for index, row in df.iterrows():
         data = ModelResidencias(
             name = row['name'],
@@ -60,21 +62,3 @@ if __name__ == "__main__":
     port = settings.PORT
     manager.run()
     app.run(debug=True, host='0.0.0.0', port=port)
-
-
-    # id	
-    # name	
-    # host_id	
-    # host_name	
-    # neighbourhood	
-    # latitude	
-    # longitude	
-    # room_type	
-    # price	
-    # minimum_nights	
-    # number_of_reviews	
-    # last_review	
-    # reviews_per_month	
-    # calculated_host_listings_count	
-    # availability_365	
-    # neighbourhood_group

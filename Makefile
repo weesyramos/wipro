@@ -3,9 +3,6 @@
 run:
 	python manage.py runserver --host 0.0.0.0 --port 5000
 
-migrate:
-	python manage.py db migrate
-
 upgrade:
 	python manage.py db upgrade
 
@@ -15,7 +12,7 @@ deps:
 
 # INICIAR PROJETO USANDO DOCKER
 serve:
-	sudo docker run -p 2000:5000 zap
+	sudo docker run -p 2000:5000 residencias
 
 # RODAR TESTES
 docker-tests:

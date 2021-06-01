@@ -5,7 +5,6 @@ from flask import Flask, request
 from flask_migrate import Migrate
 from time import strftime
 
-
 from backend import settings
 from backend.core.models.model_residencias import configure as config_db
 from backend.helpers.exceptions.exception import AppBadRequest
@@ -60,7 +59,6 @@ def create_app():
                      request.method, request.get_data().decode(), request.full_path)
 
         return ApiCore404Exception().serialize()
-
 
     @app.route('/')
     def home():
